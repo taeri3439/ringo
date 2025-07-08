@@ -1,0 +1,74 @@
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card:hover {
+    border: 1px solid #FF8127;
+}
+
+.card:hover .ImageBlackBox  img {
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+}
+
+/*.exampleImageBlack {*/
+/*    width: 100%;*/
+/*    height: 140px;*/
+/*    background-color: #000;*/
+/*    margin-bottom: 0.75rem;*/
+/*    overflow: hidden;*/
+/*}*/
+
+.ImageBlackBox  img {
+    width: 330px;
+    height: 216px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.ImageBlackBox figure{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 0.75rem;
+    color: #555;
+    overflow: hidden;
+    height: calc(1.4em * 2);
+    word-break: break-word;
+}
+
+.card-price {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}

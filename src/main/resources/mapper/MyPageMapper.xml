@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.mypage.mapperJava.UserClassMapper">
+
+    <resultMap id="userClassMap" type="com.example.ringo.command.MyPageVO">
+        <id property="classManageId" column="class_manage_id"/>
+        <result property="classManageStatus" column="class_manage_status"/>
+        <result property="classManageStartDate" column="class_manage_start_date"/>
+        <result property="classManageFinishDate" column="class_manage_finish_date"/>
+        <result property="recruitmentPostId" column="recruitment_post_id"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+
+        <result property="recruitmentPostTitle" column="recruitment_post_title"/>
+        <result property="recruitmentPostContent" column="recruitment_post_content"/>
+        <result property="recruitmentPostSystime" column="recruitment_post_systime"/>
+        <result property="recruitmentPostCategory" column="recruitment_post_category"/>
+        <result property="recruitmentPostViewcount" column="recruitment_post_viewcount"/>
+
+    </resultMap>
+
+    <resultMap id="wishMap" type="com.example.ringo.command.MyPageVO">
+        <id property="recruitmentPostId" column="recruitment_post_id"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+        <result property="recruitmentPostTitle" column="recruitment_post_title"/>
+        <result property="recruitmentPostContent" column="recruitment_post_content"/>
+        <result property="recruitmentPostSystime" column="recruitment_post_systime"/>
+        <result property="recruitmentPostCategory" column="recruitment_post_category"/>
+        <result property="recruitmentPostViewcount" column="recruitment_post_viewcount"/>
+        <result property="mainImageUrl" column="mainImageUrl"/>
+
+        <result property="applyWishId" column="apply_wish_id"/>
+        <result property="isWish" column="is_wish"/>
+        <result property="isApply" column="is_apply"/>
+
+    </resultMap>
+
+    <resultMap id="reviewMap" type="com.example.ringo.command.MyPageVO">
+        <id property="recruitmentReviewId" column="recruitment_review_id"/>
+        <result property="recruitmentReviewTitle" column="recruitment_review_title"/>
+        <result property="recruitmentReviewContent" column="recruitment_review_content"/>
+        <result property="recruitmentReviewScore" column="recruitment_review_score"/>
+        <result property="recruitmentPostId" column="recruitment_post_id"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+        <result property="recruitmentReviewTime" column="recruitment_review_time"/>
+        <result property="userNickName" column="user_nick_name"/>
+        <result property="userProfile" column="user_profile"/>
+        <result property="userProfileMimetype" column="user_profile_mimetype"/>
+        <result property="userProfileBytes" column="user_profile"/>
+
+    </resultMap>
+
+    <resultMap id="timetableMap" type="com.example.ringo.command.ScheduleVO">
+        <id property="timetableScheduleId" column="timetable_schedule_id"/>
+        <result property="timetableScheduleContent" column="timetable_schedule_content"/>
+        <result property="timetableScheduleX" column="timetable_schedule_x"/>
+        <result property="timetableScheduleY" column="timetable_schedule_y"/>
+        <result property="timetableScheduleWidth" column="timetable_schedule_width"/>
+        <result property="timetableScheduleHeight" column="timetable_schedule_height"/>
+        <result property="timetableScheduleColor" column="timetable_schedule_color"/>
+        <result property="timetableScheduleTextColor" column="timetable_schedule_text_color"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+
+    </resultMap>
+
+
+
+<!--  내가 듣는 수업 불러오기  -->
+    <select id="getMyApplyClass" resultMap="userClassMap">
+        SELECT
+            c.class_manage_id,
+            c.class_manage_status,
+            c.class_manage_start_date,
+            c.class_manage_finish_date,
+            c.recruitment_post_id,
+            c.user_primary_id,
+            r.recruitment_post_title,
+            r.recruitment_post_content,
+            r.recruitment_post_systime,
+            r.recruitment_post_category,
+            r.recruitment_post_viewcount
+        FROM class_manage c
+                 JOIN recruitment_post r ON c.recruitment_post_id = r.recruitment_post_id
+        WHERE c.user_primary_id = #{userPrimaryId}
+          AND c.class_manage_status = '신청중'
+    </select>
+
+<!--  내가 찜한 수업 불러오기  -->
+    <select id="getMyWish" resultMap="wishMap" parameterType="int">
+        SELECT
+            a.apply_wish_id,
+            a.is_wish,
+            a.is_apply,
+            a.recruitment_post_id,
+            a.user_primary_id,
+            r.recruitment_post_title,
+            r.recruitment_post_content,
+            r.recruitment_post_systime,
+            r.recruitment_post_category,
+            r.recruitment_post_viewcount,
+            (
+                SELECT img_url
+                FROM image
+                WHERE recruitment_post_id = a.recruitment_post_id AND img_main = true
+                LIMIT 1
+            ) AS mainImageUrl
+        FROM apply_wish a
+            JOIN recruitment_post r ON a.recruitment_post_id = r.recruitment_post_id
+        WHERE a.user_primary_id = #{userPrimaryId}
+          AND a.is_wish = true
+        ORDER BY a.apply_wish_id DESC
+    </select>
+
+    <!-- 1. 찜 여부 확인 (존재하는지) -->
+    <select id="checkWishExists" resultType="int" parameterType="com.example.ringo.command.MyPageVO">
+        SELECT COUNT(*) FROM apply_wish
+        WHERE user_primary_id = #{userPrimaryId}
+          AND recruitment_post_id = #{recruitmentPostId}
+    </select>
+
+    <!-- 2. 찜 등록 -->
+    <insert id="insertWish" parameterType="com.example.ringo.command.MyPageVO">
+        INSERT INTO apply_wish (user_primary_id, recruitment_post_id, is_wish)
+        VALUES (#{userPrimaryId}, #{recruitmentPostId}, #{isWish})
+    </insert>
+
+<!--  찜 하트 버튼 누르면 db 업뎃하기  -->
+    <update id="updateWish" parameterType="com.example.ringo.command.MyPageVO">
+        UPDATE apply_wish
+        SET is_wish = #{isWish}
+        WHERE user_primary_id = #{userPrimaryId}
+          AND recruitment_post_id = #{recruitmentPostId}
+    </update>
+
+<!--  내 리뷰 가져오기  -->
+    <select id="getMyReview" resultMap="reviewMap" parameterType="int">
+        SELECT
+            r.recruitment_review_id,
+            r.recruitment_review_title,
+            r.recruitment_review_content,
+            r.recruitment_review_score,
+            r.recruitment_post_id,
+            r.user_primary_id,
+            r.recruitment_review_time,
+            u.user_nick_name,
+            u.user_profile,
+            u.user_profile_mimetype
+        FROM recruitment_review r
+                 LEFT JOIN users u ON r.user_primary_id = u.user_primary_id
+        WHERE r.user_primary_id = #{userPrimaryId}
+    </select>
+
+<!-- 시간표 띄우기 -->
+    <select id="getTimetable" resultMap="timetableMap">
+        SELECT *
+        FROM timetable_schedule
+        WHERE user_primary_id = #{userPrimaryId}
+    </select>
+
+
+<!--  기존 시간표 지우기  -->
+    <delete id="deleteTimetablePast" parameterType="int">
+        DELETE FROM timetable_schedule
+        WHERE user_primary_id = #{userPrimaryId}
+    </delete>
+
+    <!-- 시간표 삽입 -->
+    <insert id="insertSchedule" parameterType="map">
+        INSERT INTO timetable_schedule (
+            user_primary_id,
+            timetable_schedule_content,
+            timetable_schedule_x,
+            timetable_schedule_y,
+            timetable_schedule_width,
+            timetable_schedule_height,
+            timetable_schedule_color,
+            timetable_schedule_text_color
+        ) VALUES (
+                     #{userPrimaryId},
+                     #{schedule.timetableScheduleContent},
+                     #{schedule.timetableScheduleX},
+                     #{schedule.timetableScheduleY},
+                     #{schedule.timetableScheduleWidth},
+                     #{schedule.timetableScheduleHeight},
+                     #{schedule.timetableScheduleColor},
+                     #{schedule.timetableScheduleTextColor}
+                 )
+    </insert>
+
+
+</mapper>
+
+
+

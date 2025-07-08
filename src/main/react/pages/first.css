@@ -1,0 +1,20 @@
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    border-style: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    vertical-align: top;
+}

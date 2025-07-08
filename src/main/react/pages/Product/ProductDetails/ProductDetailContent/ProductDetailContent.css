@@ -1,0 +1,22 @@
+
+/*.leftBottom {*/
+/*    width: 74%;*/
+/*    border-top: 1px solid #000;*/
+/*    padding: 20px;*/
+/*}*/
+
+.leftService {
+    white-space: pre-wrap;
+}
+
+.contentImageGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.detailImage {
+    max-width: 100%;
+    object-fit: cover;
+}

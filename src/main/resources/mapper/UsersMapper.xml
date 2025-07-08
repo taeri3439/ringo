@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.users.mapperJava.UsersMapper">
+
+    <select id="usersVOList" resultType="UsersVO">
+        SELECT user_primary_id,
+               user_id,
+               user_pw,
+               user_name
+        FROM users
+    </select>
+
+    <insert id="signup" parameterType="UsersVO">
+        INSERT INTO users (
+            user_id, user_pw, user_name, user_nick_name, user_birth, user_profile, user_phone, user_email, user_gender, user_age, user_interest,
+            introduction_title, introduction_content
+        ) VALUES (
+                     #{userId}, #{userPw}, #{userName}, #{userId}, #{userBirth}, #{userProfile}, #{userPhone}, #{userEmail}, #{userGender}, #{userAge}, #{userInterest},
+                     #{introductionTitle}, #{introductionContent}
+                 )
+    </insert>
+
+
+    <select id="countByUserId" parameterType="String" resultType="int"> /* 아이디 중복 체크 */
+        SELECT COUNT(*) FROM users WHERE user_id = #{userId}
+    </select>
+
+
+    <select id="findByUserId"
+            parameterType="String"
+            resultType="UsersVO"> /* 로그인 시 아이디 존재 여부 확인 */
+        SELECT
+            user_primary_id AS userPrimaryId,
+            user_id         AS userId,
+            user_pw         AS userPw,
+            user_name       AS userName,
+            user_nick_name  AS userNickName,
+            user_gender     AS userGender,
+            user_birth      AS userBirth,
+            user_phone      AS userPhone,
+            user_email      AS userEmail,
+            user_interest   AS userInterest,
+            user_profile    AS userProfile,
+            user_profile_mimetype AS userProfileMimeType,
+            introduction_title AS introductionTitle,
+            introduction_content AS introductionContent,
+            user_create_date      AS createdAt,
+            user_age        AS userAge,
+            user_role       AS userRole
+        FROM
+            users
+        WHERE
+            user_id = #{userId}
+    </select>
+
+    <select id="findId" resultType="UsersVO">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            user_create_date AS createdAt
+        FROM users
+        WHERE user_name = #{userName}
+          AND REPLACE(user_phone, '-', '') = REPLACE(#{userPhone}, '-', '')
+    </select>
+
+    <select id="findUserForReset" parameterType="UsersVO" resultType="UsersVO">
+        SELECT
+            user_id as userId,
+            user_name as userName,
+            user_phone as userPhone
+        FROM users
+        WHERE user_name = #{userName}
+          AND user_id = #{userId}
+          AND user_phone = #{userPhone}
+    </select>
+
+    <update id="updatePassword" parameterType="UsersVO">
+        UPDATE users
+        SET user_pw = #{userPw}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updateUserInfo" parameterType="com.example.ringo.command.UsersVO">
+        UPDATE users
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="userNickName != null">user_nick_name = #{userNickName},</if>
+            <if test="userPhone != null">user_phone = #{userPhone},</if>
+            <if test="userEmail != null">user_email = #{userEmail},</if>
+            <if test="userInterest != null">user_interest = #{userInterest},</if>
+            <if test="userProfile != null">user_profile = #{userProfile},</if>
+            <if test="userProfileMimeType != null">user_profile_mimetype = #{userProfileMimeType},</if>
+            <if test="introductionTitle != null">introduction_title = #{introductionTitle},</if>
+            <if test="introductionContent != null">introduction_content = #{introductionContent},</if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="selectUserPrimaryIdByUserId" parameterType="String" resultType="int">
+        SELECT user_primary_id FROM users WHERE user_id = #{userId}
+    </select>
+
+</mapper>

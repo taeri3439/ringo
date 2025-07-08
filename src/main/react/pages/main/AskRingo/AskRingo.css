@@ -1,0 +1,111 @@
+.ask-ringo-container {
+    margin: 32px 150px;
+    background-color: #fff;
+    min-height: 90vh;
+    font-family: sans-serif;
+}
+
+.ask-ringo-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+/* 변경된 부분 */
+.ask-ringo-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .ask-ringo-flex {
+        flex-direction: row;
+    }
+
+    .ask-ringo-posts {
+        flex: 2;
+    }
+
+    .ask-ringo-sidebar {
+        flex: 1;
+    }
+}
+
+.ask-ringo-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ringo-post-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.ringo-post-content {
+    flex: 1;
+}
+
+.ringo-post-source {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.ringo-post-title {
+    font-weight: bold;
+    margin: 0.25rem 0;
+}
+
+.ringo-post-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ringo-post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 0.5rem;
+}
+
+.ringo-post-thumbnail {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    margin-left: 0.5rem; /* ← 필요 시 여기 조절 */
+    border-radius: 0.5rem;
+}
+
+.ask-ringo-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ringo-sidebar-ad {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ringo-sidebar-image {
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ringo-sidebar-title {
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1.2;
+}

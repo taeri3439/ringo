@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.qna.mapperJava.QnaMapper">
+
+    <resultMap id="qnaMap" type="com.example.ringo.command.QnaVO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postCreateDate" column="post_create_date"/>
+        <result property="postType" column="post_type"/>
+        <result property="postViewCount" column="post_view_count"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+
+        <result property="commentContent" column="comment_content"/>
+    </resultMap>
+
+    <insert id="insertQna" parameterType="com.example.ringo.command.QnaVO">
+        INSERT INTO post (
+            post_title,
+            post_content,
+            post_create_date,
+            post_type,
+            user_primary_id
+        )
+        VALUES (
+                   #{postTitle},
+                   #{postContent},
+                   NOW(),
+                   '문의',
+                   #{userPrimaryId}
+               )
+    </insert>
+
+<!--    <select id="getQnaList" resultMap="qnaMap">-->
+<!--        SELECT * FROM post-->
+<!--        WHERE post_type = '문의'-->
+<!--        ORDER BY post_id DESC-->
+<!--    </select>-->
+
+    <select id="getQnaList" parameterType="map" resultMap="qnaMap">
+        SELECT
+            p.*,
+            c.comment_content AS comment_content
+        FROM post p
+                 LEFT JOIN comment c ON p.post_id = c.post_id AND c.comment_depth = 0
+        WHERE p.post_type = '문의'
+          AND p.post_title ILIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY p.post_id DESC
+            LIMIT #{amount} OFFSET #{start}
+    </select>
+
+<!--    <select id="getQnaListPaging" resultMap="qnaMap">-->
+<!--        SELECT * FROM post-->
+<!--        WHERE post_type = '문의'-->
+<!--        AND qna_post_title ILIKE CONCAT('%', #{keyword}, '%')-->
+<!--        ORDER BY qna_post_id DESC-->
+<!--            LIMIT #{amount} OFFSET #{start}-->
+<!--    </select>-->
+
+    <select id="getQnaListPaging" resultMap="qnaMap">
+        SELECT
+            p.*,
+            c.comment_content AS comment_content
+        FROM post p
+                 LEFT JOIN comment c ON p.post_id = c.post_id AND c.comment_depth = 0
+        WHERE p.post_type = '문의'
+          AND p.post_title ILIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY p.post_id DESC
+            LIMIT #{amount} OFFSET #{start}
+    </select>
+
+    <select id="getTotalQnaCount" resultType="int">
+        SELECT COUNT(*) FROM post
+        WHERE post_type = '문의'
+          AND post_title ILIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.notice.mapperJava.NoticeMapper">
+
+    <resultMap id="postMap" type="com.example.ringo.command.PostVO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postCreateDate" column="post_create_date"/>
+        <result property="postType" column="post_type"/>
+        <result property="postViewCount" column="post_view_count"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+    </resultMap>
+
+    <select id="getNoticeList" resultMap="postMap">
+        SELECT * FROM post
+                 WHERE post_type = '공지'
+                 ORDER BY post_id DESC
+    </select>
+
+    <select id="getNoticeListPaging" resultMap="postMap">
+        SELECT * FROM post
+        WHERE post_type = '공지'
+        AND post_title ILIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY post_id DESC
+            LIMIT #{amount} OFFSET #{start}
+    </select>
+
+    <select id="getTotalNoticeCount" resultType="int">
+        SELECT COUNT(*) FROM post
+        WHERE post_type = '공지'
+        AND post_title ILIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+
+</mapper>

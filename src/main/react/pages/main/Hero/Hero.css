@@ -1,0 +1,119 @@
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 150px;
+}
+
+.sub-heading {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.main-heading {
+    font-size: 70px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.highlight-text {
+    color: #FF8127;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100vh;
+    height: 60px;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 0 25px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #555;
+    background: transparent;
+}
+
+.search-bar input::placeholder{
+    color: #ccc
+}
+
+img.search-button {
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+}
+
+.hero-categories {
+    display: flex;
+    place-content: space-between;
+    padding: 10px;
+}
+
+.hero-categories span{
+    padding: 5px 20px;
+    margin: 10px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 9999px;
+    font-size: 14px;
+    color: #222;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: background-color 0.2s ease;
+}
+
+.hero-categories span:hover {
+    background-color: #e2e2e2;
+}
+
+.carousel-container {
+    position: relative;
+    width: 600px;  /* 원하는 크기로 조정 */
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-image {
+    position: absolute;
+    margin: 5%;
+    width: 90%;
+    height: 90%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1;
+    border-radius: 15px;
+}
+
+.carousel-image.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.carousel-next-btn {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    background-color: rgba(0,0,0,.3);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 4px 6px 4px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: background 0.18s;
+    outline: none;
+}

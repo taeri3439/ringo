@@ -1,0 +1,118 @@
+--user 테이블 만들기
+CREATE TABLE users (
+    user_primary_id   SERIAL PRIMARY KEY,       -- 유저아이디 (PK, 자동 증가)
+    user_id           VARCHAR(50) NOT NULL,     -- 아이디
+    user_pw           VARCHAR(100) NOT NULL,    -- 비밀번호 (암호화 저장 권장)
+    user_name         VARCHAR(50) NOT NULL,     -- 이름
+    user_nick_name    VARCHAR(50),              -- 닉네임
+    user_age          INTEGER,                  -- 나이
+    user_gender       VARCHAR(10),              -- 성별
+    user_phone        VARCHAR(20),              -- 연락처
+    user_role         VARCHAR(20),              -- 역할
+    user_profile      BYTEA,             		-- 프로필이미지 (이미지 URL 등)
+    user_birth        DATE,                     -- 생년월일
+    user_email        VARCHAR(100),             -- 이메일
+    user_interest     VARCHAR(100),             -- 관심분야
+    user_create_date  TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성일
+    user_profile_mimetype VARCHAR(50) --프로필이미지 타입(png, jpeg, jpg등등 )
+    introduction_title VARCHAR(100) - 고수 소개(제목)
+    introduction_content VARCHAR(1000) -고수 소개(내용)
+);
+
+--모집글 테이블 만들기
+CREATE TABLE recruitment_post (
+    recruitment_post_id                 SERIAL PRIMARY KEY,
+    recruitment_post_title              VARCHAR(255),
+    recruitment_post_content            TEXT,
+    recruitment_post_systime            TIMESTAMP NOT NULL DEFAULT NOW(),
+    recruitment_post_category           VARCHAR(100),
+    recruitment_post_viewcount          INTEGER DEFAULT 0,
+    recruitment_post_weekly_sessions    VARCHAR(100),
+    recruitment_post_session_duration   VARCHAR(100),     --단위: 시간
+    recruitment_post_price              INTEGER,
+    recruitment_post_price_basis        VARCHAR(20), -- 예: 'per_hour', 'per_session', 'negotiable'
+    recruitment_post_contact_start_time TIME,
+    recruitment_post_contact_end_time   TIME,
+    recruitment_post_avg_response_time  VARCHAR(100),
+    user_primary_id                     INTEGER
+);
+
+--모집글 리뷰 테이블 만들기
+CREATE TABLE recruitment_review (
+	recruitment_review_id		SERIAL PRIMARY KEY, 	--리뷰 아이디
+	recruitment_review_title	VARCHAR(200) NOT NULL,	--리뷰 제목
+	recruitment_review_content	TEXT NOT NULL,			--리뷰 내용
+	recruitment_review_score	VARCHAR(10) NOT NULL,	--리뷰 평점
+	recruitment_post_id			INTEGER,				--원 모집글 아이디
+	user_primary_id				INTEGER					--리뷰 작성한 유저 아이디
+);
+
+--수강신청 및 찜
+CREATE TABLE apply_wish (
+    apply_wish_id         SERIAL PRIMARY KEY,            -- 수강신청ID (자동 증가, PK)
+    is_wish               BOOLEAN,              		 -- 찜여부 (true/false)
+    is_apply              BOOLEAN,              		 -- 수강신청여부 (true/false)
+    recruitment_post_id   INTEGER,              		 -- 모집글아이디 (FK)
+    user_primary_id       INTEGER                		 -- 유저아이디 (FK)
+);
+
+-- 이미지 테이블 만들기
+CREATE TABLE image(
+	img_id				SERIAL PRIMARY KEY,			--이미지 아이디
+	img_url 			VARCHAR(200) NOT NULL,		--이미지의 s3 경로
+	img_thumbnail       BOOLEAN,                    --이미지의 썸네일 유무
+	recruitment_post_id	INTEGER,					--이미지가 업로드된 모집글 아이디
+	post_id 			INTEGER						--커뮤니티 게시글에 사용된 이미지
+);
+
+-- 게시판 테이블 만들기
+CREATE TABLE post (
+	post_id 			SERIAL PRIMARY KEY,								--게시글 아이디
+	post_title			VARCHAR(200) NOT NULL,							--게시글 제목
+	post_content		TEXT NOT NULL,									--게시글 내용
+	post_create_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	--게시글 작성 날짜
+	post_type			VARCHAR(100) NOT NULL,							--게시글 종류
+	post_view_count		INTEGER DEFAULT 0,								--게시글 조회수
+	user_primary_id		INTEGER											--게시글 작성 유저 아이디
+);
+
+--댓글 테이블 만들기
+CREATE TABLE comment (
+	comment_id 			SERIAL PRIMARY KEY,								--댓글 아이디
+	comment_content		TEXT NOT NULL,									--댓글 내용
+	comment_depth		INTEGER,										--댓글 깊이
+	comment_parent_id	INTEGER,										--댓글 부모 아이디
+	comment_create_time	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	--댓글 작성 날짜
+	post_id				INTEGER,										--댓글이 달린 게시글 아이디
+	user_primary_id		INTEGER											--댓글 작성한 유저 아이디
+);
+
+--시간표 테이블 만들기
+CREATE TABLE schedule (
+	schedule_id				SERIAL PRIMARY KEY,		--시간표 아이디
+	schedule_day			VARCHAR(100),			--학습 요일
+	schedule_start_time		TIMESTAMP,				--학습 시작하는 시간(일별 저장)
+	schedule_finish_time	TIMESTAMP,				--학습 종료하는 시간(일별 저장)
+	user_primary_id			INTEGER					--시간표 작성 유저 아이디
+);
+
+
+--수업 상태 관리
+CREATE TABLE class_manage (
+	class_manage_id				SERIAL PRIMARY KEY,		--수업 상태 관리 아이디
+	class_manage_status			varchar(100),			--수업 상태 (신청 중 / 수업중 / 수업완료)
+	class_manage_start_date		TIMESTAMP,				--수업 시작 날짜
+	class_manage_finish_date	TIMESTAMP,				--수업 종료 날짜
+	recruitment_post_id			INTEGER,				--수업 모집글 아이디 (수업 상세정보 페이지 확인용)
+	user_primary_id				INTEGER					--수업 등록 유저 아이디
+);
+
+--문의 게시판 테이블 만들기
+CREATE TABLE qna_post (
+    qna_post_id             SERIAL PRIMARY KEY,      --문의게시판 아이디
+    qna_post_title          varchar(1000),           --문의 제목
+    qna_post_content        varchar(5000),           --문의 내용
+    qna_post_date           TIMESTAMP,               --문의 날짜
+    qna_post_answer_date    TIMESTAMP,               --문의 답변 날짜
+    user_primary_id         INTEGER                  --문의 등록 유저 아이디
+);

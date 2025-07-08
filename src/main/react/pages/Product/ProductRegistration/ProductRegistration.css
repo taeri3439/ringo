@@ -1,0 +1,390 @@
+.select-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+    /* width: 30%;  <= 필요하면 남기고, lesson-select가 덮어씀 */
+}
+
+.select-wrapper.category-select {
+    width: 100%;
+}
+
+.select-wrapper.lesson-select {
+    width: 110px;
+    text-align: center;
+
+}
+
+.custom-select-label {
+    border: 1.5px solid #eee;
+    border-radius: 7px;
+    padding: 0px 38px 0px 12px;
+    background: #fafafa;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 38px;
+    margin-top: 14px;
+    justify-content: center;   /* 가로 가운데 정렬 */
+    text-align: center;
+}
+.select-arrow {
+    position: absolute;
+    right: 12px;
+    width: 20px;
+    height: 12px;
+    transition: transform 0.3s;
+}
+.select-arrow.open {
+    transform: rotate(180deg);
+}
+.custom-select-options {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 110%;
+    background: #fff;
+    border: 1.5px solid #eee;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s, max-height 0.3s;
+    z-index: 10;
+    max-height: 160px;      /* li 4개 정도 높이 (li당 40px이면 160px) */
+    overflow-y: auto;
+    pointer-events: none;
+}
+.custom-select-options.open {
+    opacity: 1;
+    max-height: 300px;
+    pointer-events: auto;
+}
+.custom-select-options li {
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.custom-select-options li.selected,
+.custom-select-options li:hover {
+    background: #ffefdf;
+}
+
+/* 기존 업로드 폼 스타일은 그대로 유지 */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: #fafafa;
+    min-height: 100vh;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+.upload-form {
+    width: 40%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    padding: 32px 28px 36px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 818px;
+}
+.upload-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: left;
+}
+.upload-input {
+    height: 38px;
+    border: 1.5px solid #eee;
+    border-radius: 7px;
+    font-size: 15px;
+    margin-bottom: 14px;
+    padding-left: 15px;
+    background: #fafafa;
+    outline: none;
+}
+.upload-textarea {
+    border: 1.5px solid #eee;
+    border-radius: 7px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 15px;
+    background: #fafafa;
+    resize: none;
+    outline: none;
+    height: 400px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+}
+
+.upload-textarea:focus {
+    border-color: #ff8127;
+}
+.upload-img-count {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+}
+.upload-img-dropzone {
+    background: #f6f6f6;
+    border: 1.5px dashed #ccc;
+    border-radius: 8px;
+    padding: 22px 0;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+}
+.upload-img-dropzone:hover {
+    border-color: #ff8127;
+}
+.upload-img-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+    color: #ff8127;
+}
+.upload-img-text {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.4;
+}
+.upload-img-preview {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.upload-img-thumb {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.upload-img-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.upload-img-remove {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ff8127;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 15px;
+    line-height: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.upload-submit-btn {
+    width: 100%;
+    height: 44px;
+    background-color: #ff8127;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+.upload-submit-btn:hover {
+    background: #ff9e53;
+}
+
+.main-image-upload-area {
+    width: 320px;
+    height: 240px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto 24px auto;
+    border: 1.5px dashed #ddd;
+    transition: border 0.2s;
+}
+.main-image-upload-area:hover {
+    border: 1.5px solid #ff8127;
+}
+.main-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.camera-icon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+    margin-bottom: 10px;
+}
+.placeholder-text {
+    font-size: 16px;
+    color: #888;
+}
+.main-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* <-- 여기! */
+    display: block;
+    border-radius: 12px;
+}
+.main-image-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.lesson-info-section {
+    margin: 32px 0 24px 0;
+    padding: 24px 0 0 0;
+    border-top: 1.5px solid #e5e5e5;
+}
+.lesson-info-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #222;
+}
+.lesson-info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.lesson-price-input {
+    width: 180px;
+    padding: 8px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #fff;
+    margin: 0 8px 0 8px;
+
+}
+
+input.lesson-price-input:focus {
+    border-color: #ff8127 !important;
+    outline: none;
+}
+
+.radio-label {
+    margin-right: 18px;
+    font-size: 15px;
+    color: #ff8127;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: normal;
+}
+input[type="radio"] {
+    accent-color: #ff8127;
+    transform: scale(1.2);
+}
+
+.lesson-info-row > label > input {
+    margin-right: 8px;
+}
+
+.custom-radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    margin-right: 18px;
+}
+
+/* 숨김 처리 */
+.custom-radio input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+/* 바깥 회색 원 */
+.radio-visual {
+    display: inline-block;
+    width: 16px;          /* 바깥 원 크기 */
+    height: 16px;
+    border: 2.5px solid #bbb;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    margin-right: 10px;
+    box-sizing: border-box;
+    transition: border 0.2s;
+}
+
+/* 주황색 점(체크 시) */
+.custom-radio input[type="radio"]:checked + .radio-visual::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;         /* 점(안쪽 원) 크기 */
+    height: 8px;
+    background: #ff542b; /* 원하는 주황색 */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contact-time-input,
+.response-time-input {
+    height: 36px;
+    border: 1.5px solid #eee;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #fafafa;
+    padding: 0 10px;
+    outline: none;
+}
+.contact-time-input:focus,
+.response-time-input:focus {
+    border-color: #ff8127;
+}
+
+input[type="time"] {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    color: #222;
+}

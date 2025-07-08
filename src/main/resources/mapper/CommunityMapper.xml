@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.community.mapperJava.CommunityMapper">
+
+
+    <insert id="writePost" parameterType="PostVO" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO post (
+            post_title, post_content, post_type, user_primary_id
+        ) VALUES (
+            #{postTitle}, #{postContent}, #{postType}, #{userPrimaryId}
+        )
+    </insert>
+
+    <insert id="insertPostImage">
+        INSERT INTO image (post_id, img_url)
+        VALUES (#{postId}, #{imageUrl})
+    </insert>
+
+    <select id="getPost" resultType="PostVO">
+        SELECT
+        p.*,
+        (
+        SELECT COUNT(*)
+        FROM comment c
+        WHERE c.post_id = p.post_id
+        ) AS post_comment_count
+        FROM post p
+        <where>
+            <choose>
+                <when test="category != null and category != '' and category != '전체'">
+                    post_type = #{category}
+                </when>
+                <otherwise>
+                    post_type IN ('자유', '홍보', '질문')
+                </otherwise>
+            </choose>
+
+            <if test="search != null and search != ''">
+                AND (
+                post_title LIKE CONCAT('%', #{search}, '%')
+                OR post_content LIKE CONCAT('%', #{search}, '%')
+                )
+            </if>
+        </where>
+        ORDER BY p.post_id DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+
+    <select id="getPostCount" resultType="Integer">
+        SELECT count(*)
+        FROM post
+        <where>
+            <choose>
+                <when test="category != null and category != '' and category != '전체'">
+                    post_type = #{category}
+                </when>
+                <otherwise>
+                    post_type in ('자유', '홍보', '질문')
+                </otherwise>
+            </choose>
+
+            <if test="search != null and search != ''">
+                AND (
+                post_title LIKE CONCAT('%', #{search}, '%')
+                OR post_content LIKE CONCAT('%', #{search}, '%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="getOnePost" resultType="PostVO">
+        select
+            p.*,
+            u.user_nick_name
+        from
+            post as p
+                JOIN
+            users as u
+            ON p.user_primary_id = u.user_primary_id
+        where p.post_id = #{post_id};
+    </select>
+
+    <select id="getImagesByPostId" resultType="string">
+        SELECT img_url FROM image WHERE post_id = #{postId}
+    </select>
+
+    <select id="writeComment" parameterType="CommentVO">
+        INSERT INTO comment(
+            comment_content, comment_depth, comment_parent_id, post_id, user_primary_id
+        )
+        VALUES (
+            #{commentContent}, #{commentDepth}, #{commentParentId}, #{postId}, #{userPrimaryId}
+        )
+    </select>
+
+    <select id="getAllParentComments" resultType="CommentVO">
+        SELECT
+            c.*,
+            u.user_nick_name,
+            (
+                SELECT COUNT(*)
+                FROM COMMENT AS child
+                WHERE child.comment_parent_id = c.comment_id
+            ) AS child_comment_count
+        FROM
+            COMMENT AS c
+                JOIN
+            users AS u
+            ON c.user_primary_id = u.user_primary_id
+        WHERE
+            c.post_id = #{postId}
+          AND c.comment_depth = 0
+    </select>
+
+    <select id="getChildComments" resultType="CommentVO">
+        SELECT
+            c.*,
+            u.user_nick_name
+        FROM
+            COMMENT as c
+                JOIN
+            users as u
+            ON
+                c.user_primary_id = u.user_primary_id
+        WHERE
+            post_id = #{postId}
+          AND
+            comment_parent_id = #{commentParentId}
+          AND
+            comment_depth = 1
+    </select>
+
+
+
+</mapper>

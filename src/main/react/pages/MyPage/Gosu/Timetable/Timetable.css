@@ -1,0 +1,220 @@
+.timetable-container {
+    font-family: sans-serif;
+    padding: 1rem;
+}
+
+button {
+    margin: 0;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.editButton {
+    color: #fff;
+    background-color: #FF8127;
+    border:none;
+    border-radius: 10px;
+}
+
+.editButtonInButton > button {
+    color: #FF8127;
+    background-color: #fff;
+    border:1px solid #FF8127;
+    border-radius: 10px;
+}
+
+.editButtonInButton > button:nth-of-type(1) {
+    margin-right: 8px;
+}
+
+/* 그리드 전체 영역 */
+.timetable-grid-editable {
+    position: relative;
+    width: calc(100px * 7 + 80px); /* 요일 7칸 + 시간 열 */
+    height: calc(60px * 16 + 30px); /* 16시간 + 헤더 */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.timetableTitle {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 32px;
+    margin-bottom: 15px;
+}
+
+.timetableTitleText {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    /*line-height: 26px;*/
+}
+
+/* 왼쪽 시간 열 */
+.time-column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    z-index: 2;
+}
+
+.corner-cell {
+    height: 30px;
+    background: #f8f8f8;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 각 시간 라벨 */
+.time-label {
+    height: 60px;
+    line-height: 60px;
+    text-align: right;
+    padding-right: 8px;
+    font-size: 12px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #ccc;
+}
+
+/* 상단 요일 헤더 */
+.days-column {
+    position: absolute;
+    top: 0;
+    left: 80px;
+    display: flex;
+    height: 30px;
+    width: 700px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    z-index: 2;
+}
+
+.day-label {
+    text-align: center;
+    line-height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    width: 100px;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+/* 배경 격자 */
+.grid-background {
+    position: absolute;
+    top: 30px;
+    left: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 960px;
+    z-index: 1;
+}
+
+.grid-cell {
+    box-sizing: border-box;
+    border: 1px solid #f0f0f0;
+    width: 100px;
+    height: 60px;
+    background: #fff;
+    pointer-events: none;
+}
+
+/* 일정 블록 */
+.block-editable {
+    position: absolute;
+    background-color: rgba(65, 105, 225, 0.75);
+    border: 1px solid #fff;
+    color: white;
+    padding: 0;
+    font-size: 13px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    cursor: move;
+    z-index: 3;
+}
+
+.block-editable .react-draggable .react-draggable-dragged:hover {
+    background: #ffffff;
+    border: 1px solid #fff;
+}
+
+.block-content {
+    user-select: none;
+}
+
+.delete-button {
+    margin-left: 4px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.block-wrapper {
+    position: absolute;
+
+
+}
+
+.floating-delete-button {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.block-wrapper:hover .floating-delete-button {
+    opacity: 1;
+}
+
+.block-content:hover .block-text-preview {
+    -webkit-line-clamp: unset;
+    overflow: auto;
+    pointer-events: auto; /* hover 중에는 텍스트 스크롤 가능하게 */
+}
+
+.block-text-preview {
+    transition: all 0.2s ease;
+}
+
+.block-wrapper:hover .text-preview {
+    -webkit-line-clamp: unset;
+    overflow: auto;
+    /*background-color: #ff8127; !* 선택사항 *!*/
+    pointer-events: auto;
+    border-radius: 5px;
+    width: 98px;
+}
+
+.block-editable > input {
+    position: absolute;
+    top: -27px;
+    left: 0;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    border-radius: 6px;
+    border: 2px solid #ccc
+}
+

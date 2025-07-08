@@ -1,0 +1,91 @@
+.background {
+    background: #fafafc;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.box {
+    width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    padding: 40px 40px 48px 40px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 32px;
+    border-bottom: 1px #eee solid;
+    padding-bottom: 18px;
+}
+
+.title h1 {
+    font-size: 28px;
+    margin-bottom: 0;
+}
+
+.pwchange-form {
+    width: 100%;
+    margin-top: 28px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.form-label {
+    width: 80px;
+    font-size: 14px;
+    color: #222;
+    font-weight: 500;
+}
+
+.form-input {
+    flex: 1;
+    height: 40px;
+    border: 1px solid #bababa;
+    border-width: 0 0 1.5px 0;
+    padding-left: 14px;
+    font-size: 16px;
+    margin-left: 18px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.3s;
+}
+
+.form-input::placeholder {
+    font-size: 14px;
+}
+
+.form-input:focus {
+    border-bottom: 2px solid #ff8127;
+}
+
+
+.form-actions {
+    margin-top: 36px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pwchange-button {
+    width: 180px;
+    height: 46px;
+    max-width: 390px;
+
+    background-color: #ff8127;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pwchange-button:hover {
+    background-color: #ff9e53;
+}

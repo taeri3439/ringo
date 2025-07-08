@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>[[${pageName}]]</title>
+
+  <!-- 리액트기반에 앱에서 favicon을 기본적으로 인식함 (파비콘은 어플리케이션 대표아이콘) -->
+  <link rel="icon" th:href="@{/img/favicon.ico}" />
+
+</head>
+<body>
+<div id="root"></div>
+
+<script th:src="@{'/bundle/' + ${pageName} + '.bundle.js'}"></script>
+
+</body>
+</html>

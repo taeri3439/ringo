@@ -1,0 +1,196 @@
+.userinfo-background {
+    background: #fafafc;
+    min-height: 100vh;
+    padding-top: 30px;
+}
+
+.userinfo-box {
+    width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    padding: 40px 40px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userinfo-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    text-align: center;
+    border-bottom: 1.5px solid #bbb;
+    width: 100%;
+    padding-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.profile-img-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 24px auto;
+}
+
+.img-box {
+    display: flex;
+    justify-content: center;  /* 가로 중앙 정렬 */
+    align-items: center;      /* 세로 중앙 정렬 */
+    height: 140px;            /* 컨테이너 높이 (이미지와 동일하게) */
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #eee;
+}
+.profile-img-upload-btn {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    background: black;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.profile-img-upload-btn img {
+    width: 21px;
+    height: 21px;
+}
+
+.userinfo-form {
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.userinfo-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.userinfo-label {
+    width: 90px;
+    font-size: 16px;
+    color: #222;
+    font-weight: 500;
+    text-align: left;
+}
+
+.userinfo-value {
+    font-size: 16px;
+    color: #444;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.userinfo-input {
+    flex: 1;
+    height: 38px;
+    border: 1px solid #bababa;
+    border-width: 0 0 2px 0;
+    padding-left: 12px;
+    font-size: 15px;
+    margin-left: 10px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.3s;
+    border-radius: 0;
+}
+
+.userinfo-input:focus {
+    border-bottom: 2px solid #ff8127;
+}
+
+.userinfo-input.birth {
+    width: 60px;
+    margin-left: 0;
+    text-align: center;
+    padding-left: 0px;
+
+}
+
+.userinfo-birth-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.userinfo-radio-group {
+    display: flex;
+    gap: 24px;
+    margin-left: 10px;
+}
+
+.interest-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.interest-label {
+    min-width: 80px;
+    line-height: 40px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    margin-right: 34px;
+    font-weight: 500;
+}
+
+.topic-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 0px;
+    width: 307px;
+    margin-left: -14px;
+}
+
+.topic-options button {
+    width: 90px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #BABABA;
+    cursor: pointer;
+    font-size: 12px;
+    background: white;
+    transition: background 0.2s, border 0.2s;
+    margin: 0;
+    padding: 0;
+}
+
+.topic-options button.selected {
+    background-color: #FFEFE3;
+    border: 1.5px solid #FF8127;
+    font-weight: bold;
+    color: black;
+}
+
+.userinfo-submit-btn {
+    width: 400px;
+    height: 48px;
+    background-color: #FF8127;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: background 0.2s;
+    letter-spacing: 1px;
+}
+
+.userinfo-submit-btn:hover {
+    background: #ff9e53;
+}

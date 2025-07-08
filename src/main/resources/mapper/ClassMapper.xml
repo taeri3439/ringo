@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.room.mapperJava.ClassMapper">
+
+    <insert id="insertClass" parameterType="com.example.ringo.command.ClassVO">
+        INSERT INTO class (
+            room_id, title, description, price, image_url, image_type, password, user_id, recruitment_post_id
+        )
+        VALUES (
+                   #{roomId}, #{title}, #{description}, #{price}, #{imageUrl}, #{imageType}, #{password}, #{userId}, #{recruitmentPostId}
+               )
+    </insert>
+
+    <select id="getAllClasses" resultType="com.example.ringo.command.ClassVO">
+        SELECT *
+        FROM class
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectClassByRoomId" parameterType="string" resultType="com.example.ringo.command.ClassVO">
+        SELECT * FROM class WHERE room_id = #{roomId} ORDER BY room_id DESC
+    </select>
+
+    <select id="selectClassesByUserId" resultType="com.example.ringo.command.ClassVO" parameterType="string">
+        SELECT * FROM class WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateClass" parameterType="com.example.ringo.command.ClassVO">
+        UPDATE class
+        <set>
+            title = #{title},
+            description = #{description},
+            price = #{price},
+            password = #{password},
+            <if test="imageUrl != null">
+                image_url = #{imageUrl},
+                image_type = #{imageType},
+            </if>
+            user_id = #{userId}
+        </set>
+        WHERE room_id = #{roomId}
+    </update>
+
+
+    <delete id="deleteClass" parameterType="string">
+        DELETE FROM class WHERE room_id = #{roomId}
+    </delete>
+
+    <select id="getMyStudyClass" parameterType="int" resultType="ClassManageVO">
+        SELECT
+            class_manage_id,
+            class_manage_status,
+            class_manage_start_date,
+            class_manage_finish_date,
+            recruitment_post_id,
+            user_primary_id
+        FROM class_manage
+        WHERE user_primary_id = #{userPrimaryId}
+    </select>
+
+    <select id="selectRecruitmentPostsByUserId" parameterType="int" resultType="map">
+        SELECT recruitment_post_id, recruitment_post_title
+        FROM recruitment_post
+        WHERE user_primary_id = #{userPk}
+    </select>
+
+    <select id="selectClassByRecruitmentPostId" parameterType="int" resultType="com.example.ringo.command.ClassVO">
+        SELECT * FROM class WHERE recruitment_post_id = #{recruitmentPostId}
+    </select>
+
+</mapper>

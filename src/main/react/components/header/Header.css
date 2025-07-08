@@ -1,0 +1,65 @@
+
+.header-container {
+    margin: 32px 150px;
+    font-family: sans-serif;
+    background-color: #FFF;
+    color: #000;
+}
+
+/* Header */
+.header {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    width: 100%;
+    /*min-width: 1905px;*/
+    height: 80px;
+    padding: 0 180px 0 120px;
+    backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    /*max-width: 1200px;*/
+}
+
+.navCenter a{
+    padding: 0 20px;
+}
+
+.nav a {
+    margin-right: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav .signup-button {
+    padding: 10px 20px;
+    background-color: #FF8127;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav .mypage-button {
+    padding: 10px 20px;
+    background-color: #FF8127;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav a img {
+    height: 20px;
+}
+
+.header-container .header-letterbox {
+    padding-top: 40px;
+}

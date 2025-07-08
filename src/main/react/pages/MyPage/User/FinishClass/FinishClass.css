@@ -1,0 +1,119 @@
+.section {
+    margin-bottom: 2.5rem;
+    position: relative;
+    width: 100%;
+}
+
+figure{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 45px;
+    transform: translateY(-50%);
+    transition: .4s;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.blank{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 45px;
+    transform: translateY(-50%);
+    transition: .4s;
+    z-index: 1;
+    height: 100%;
+}
+
+.section:hover .blank,
+figure:hover {
+    right: -45px;
+}
+
+.section:hover figure,
+figure:hover {
+    right: -130px;
+}
+
+figure img{
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.section-total {
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ffffff;
+    position: relative;
+    z-index: 99;
+}
+
+.card:hover {
+    border: 1px solid #FF8127;
+}
+
+.card:hover .exampleImageBlack > img {
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+}
+
+.exampleImageBlack {
+    width: 100%;
+    height: 140px;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.exampleImageBlack > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.card-desc {
+    width: 100%;                    /* 부모 card 너비에 맞춤 */
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* 최대 줄 수 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(1.2em * 2);  /* 줄 간격을 고려한 최소 높이 */
+    line-height: 1.2em;
+    font-size: 0.75rem;
+    color: #555;
+    white-space: pre-wrap;
+}
+
+.card-price {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}

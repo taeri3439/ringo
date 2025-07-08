@@ -1,0 +1,226 @@
+
+.flex {
+    display: flex;
+}
+
+.wrap {
+    background-color: #FAFAFA;
+    height: 100%;
+}
+
+/* @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+
+li, ol, ul, dd, dl {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+img {
+    vertical-align: top;
+}
+
+:root {
+    --main-color1: #255EEE;
+    --sub-color1: #87A9FF;
+    --sub-color2: #D2DFFF;
+    --text-color: #1d1d1d;
+    --text-color2:#D0D0D0;
+    --text-color3:#F5F5F0;
+}
+
+/*데스크탑*/
+@media(min-width: 767px) {
+
+    .imgbox {
+        background-color: #FF8127;
+        text-align: center;
+        height: 350px;
+        z-index: auto;
+        position: relative;
+        margin-top: 80px;
+    }
+
+    .imgbox > .imgbox_title { 
+        margin: 0 auto; 
+        color: var(--text-color3);
+    }
+    
+    .imgbox_inner {
+        display: inline-block;
+        margin-top: 60px;
+    }
+    
+    .imgbox > .imgbox_title > .imgbox_inner > .oneToOneQna {
+        font-size: 20px;
+        color: var(--text-color3);
+        margin-top: 15px;
+    }
+    
+    .imgbox > .imgbox_title > .imgbox_inner > .title_Board {
+        font-size: 50px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: var(--text-color3);
+    }
+    
+    .qna_write_page {
+
+        position: relative;
+        text-align: center;
+
+    }
+
+    .write_pagebox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        position: relative;
+        top: -160px;
+        left: 0;
+        width: 70%;
+        text-align: center;
+    }
+
+
+    .qna_write_page_inner {
+        background-color: #FFFFFF;
+        margin: 0 auto;
+        padding: 70px;
+        width: 80%;
+        border: 1px solid var(--text-color2);
+        border-radius: 3%;
+    }
+    
+    .qna_write_page_inner_title {
+        font-weight: 900;
+        margin-top: 50px;
+        margin-bottom: 40px;
+        color: var(--text-color);
+        font-size: 48px;
+        padding: 5px;
+    }
+    
+    .qna_write_page_inner_mid {
+        width: 100%;
+        overflow: hidden;
+        border-bottom: 1px solid var(--text-color);
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .qna_write_page_inner_mid > .leftbox {
+        float: left;
+        font-size: 30px;
+        font-weight: 700;
+        margin-left: 50px;
+        margin-bottom: 5px;
+    }
+    
+    .qna_write_page_inner_mid > .rightbox {
+        float: right;
+        font-size: 15px;
+        opacity: 70%;
+        margin-top: 14px;
+    }
+    
+    .qna_write_page_inner_form {
+        width: 100%;
+        color: var(--text-color);
+        padding: 10px;
+        position: relative;
+    }
+    
+    .formUpper {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .qnaTitleWrap {
+        width: 19%;
+        float: left;
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    .qnaTitle {
+        width: 80%;
+        height: 35px;
+        margin: 0 auto;
+        border-radius: 5px;
+        font-size: 15px;
+        border: 1px solid var(--text-color2);
+        padding: 7px;
+        font-size: 20px;
+    }
+
+
+    .formMid {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .qnaContentWrap {
+        /* position: absolute;
+        top: 85px;
+        left: 20px; */
+        width: 19%;
+        float: left;
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    .qnaContent {
+        float: right;
+        width: 80%;
+        height: 300px;
+        margin-right: 4px;
+        /* margin-left: 2px; */
+        resize: none;
+        white-space: pre-line;
+        border-radius: 5px;
+        border: 1px solid var(--text-color2);
+        padding: 7px;
+        font-size: 20px;
+        
+    }
+  
+    .qnaSubmitBtn {
+        margin: 10px auto;
+        width: 120px; 
+        height: 50px;
+        background-color: var(--main-color1);
+        color: var(--text-color3);
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        margin-top: 50px;
+        cursor: pointer;
+    }
+    
+    .pilsoo {
+        color: var(--main-color1);
+        margin: 7px;
+    }
+}
+

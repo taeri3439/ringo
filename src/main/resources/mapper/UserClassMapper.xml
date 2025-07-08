@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.mypage.mapperJava.UserClassMapper">
+
+
+    <select id="getMyStudyClass" parameterType="int" resultType="ClassManageVO">
+        SELECT
+            cm.class_manage_id,
+            cm.class_manage_status,
+            cm.class_manage_start_date,
+            cm.class_manage_finish_date,
+            cm.recruitment_post_id,
+            cm.user_primary_id,
+            rp.recruitment_post_title AS recruitmentPostTitle,
+            rp.recruitment_post_content AS recruitmentPostContent,
+            (
+                SELECT img_url
+                FROM image
+                WHERE recruitment_post_id = cm.recruitment_post_id AND img_main = true
+                LIMIT 1
+            ) AS mainImageUrl
+        FROM class_manage cm
+            JOIN recruitment_post rp ON cm.recruitment_post_id = rp.recruitment_post_id
+        WHERE cm.user_primary_id = #{userPrimaryId}
+          AND cm.class_manage_status = '수업중'
+        ORDER BY cm.class_manage_id DESC
+    </select>
+
+    <select id="getMyStudyClassLatest3" parameterType="int" resultType="ClassManageVO">
+        SELECT
+            cm.class_manage_id,
+            cm.class_manage_status,
+            cm.class_manage_start_date,
+            cm.class_manage_finish_date,
+            cm.recruitment_post_id,
+            cm.user_primary_id,
+            rp.recruitment_post_title AS recruitmentPostTitle,
+            rp.recruitment_post_content AS recruitmentPostContent,
+            (
+                SELECT img_url
+                FROM image
+                WHERE recruitment_post_id = cm.recruitment_post_id AND img_main = true
+                LIMIT 1
+            ) AS mainImageUrl
+        FROM class_manage cm
+            JOIN recruitment_post rp ON cm.recruitment_post_id = rp.recruitment_post_id
+        WHERE cm.user_primary_id = #{userPrimaryId}
+          AND cm.class_manage_status = '수업중'
+        ORDER BY cm.class_manage_id DESC
+            LIMIT 3
+    </select>
+
+    <select id="getMyFinishedClass" parameterType="int" resultType="ClassManageVO">
+        SELECT
+            cm.class_manage_id,
+            cm.class_manage_status,
+            cm.class_manage_start_date,
+            cm.class_manage_finish_date,
+            cm.recruitment_post_id,
+            cm.user_primary_id,
+            rp.recruitment_post_title AS recruitmentPostTitle,
+            rp.recruitment_post_content AS recruitmentPostContent,
+            (
+                SELECT img_url
+                FROM image
+                WHERE recruitment_post_id = cm.recruitment_post_id AND img_main = true
+                LIMIT 1
+            ) AS mainImageUrl
+        FROM class_manage cm
+            JOIN recruitment_post rp ON cm.recruitment_post_id = rp.recruitment_post_id
+        WHERE cm.user_primary_id = #{userPrimaryId}
+          AND cm.class_manage_status = '수업완료'
+        ORDER BY cm.class_manage_id DESC
+    </select>
+
+
+    <select id="getMyFinishedClassLatest3" parameterType="int" resultType="ClassManageVO">
+        SELECT
+            cm.class_manage_id,
+            cm.class_manage_status,
+            cm.class_manage_start_date,
+            cm.class_manage_finish_date,
+            cm.recruitment_post_id,
+            cm.user_primary_id,
+            rp.recruitment_post_title AS recruitmentPostTitle,
+            rp.recruitment_post_content AS recruitmentPostContent,
+            (
+                SELECT img_url
+                FROM image
+                WHERE recruitment_post_id = cm.recruitment_post_id AND img_main = true
+                LIMIT 1
+            ) AS mainImageUrl
+        FROM class_manage cm
+            JOIN recruitment_post rp ON cm.recruitment_post_id = rp.recruitment_post_id
+        WHERE cm.user_primary_id = #{userPrimaryId}
+          AND cm.class_manage_status = '수업완료'
+        ORDER BY cm.class_manage_id DESC
+            LIMIT 3
+    </select>
+
+    <select id="getMyStudyClassCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM class_manage
+        WHERE user_primary_id = #{userPrimaryId}
+          AND class_manage_status = '수업중'
+    </select>
+
+    <select id="getMyFinishedClassCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM class_manage
+        WHERE user_primary_id = #{userPrimaryId}
+          AND class_manage_status = '수업완료'
+    </select>
+
+
+</mapper>

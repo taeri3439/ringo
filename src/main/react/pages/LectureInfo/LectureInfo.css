@@ -1,0 +1,157 @@
+.search-bar-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100vh;
+    height: 60px;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 0 25px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #555;
+    background: transparent;
+}
+
+.search-bar input::placeholder{
+    color: #ccc
+}
+
+img.search-button {
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Categories */
+.categories {
+    display: flex;
+    padding: 34px 150px;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+    color: #374151;
+    align-items: flex-end;
+}
+
+.category {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.category img {
+    height: 60px;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+}
+
+.category img[data-category="all"] {
+    height: 40px;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+}
+
+.lectures-cards {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 24px;
+    padding: 40px 150px;
+    margin: 0 auto;
+}
+
+.lectures-cards .service-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 14px 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.lectures-cards .service-card img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.lectures-cards .service-card .service-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.lectures-cards .service-card .service-info {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.lectures-cards .service-card .service-info .service-rating {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.lectures-cards .service-card .service-meta {
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lectures-cards .service-card .service-meta .service-provider {
+    color: #222;
+    font-weight: 600;
+}
+
+.wish {
+    position: absolute;
+    text-align: right;
+    padding: 5px;
+    top: 5px;             /* 상단에서 5px 위치 */
+    right: 5px;           /* 오른쪽에서 5px 위치 */
+    cursor: pointer;      /* 클릭 커서 추가 */
+
+}
+
+.wishHeart > div:nth-child(1) {
+    display: block;
+}
+
+.wishHeart > div:nth-child(2) {
+    display: none;
+}
+
+.notWishHeart > div:nth-child(1) {
+    display: none;
+}
+
+.notWishHeart > div:nth-child(2) {
+    display: block;
+}
+
+.wishTopBox {
+    position: relative;
+}
+
+.service-card > img {
+    width: 330px;
+    height: 216px;
+}

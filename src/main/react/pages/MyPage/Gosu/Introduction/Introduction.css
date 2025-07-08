@@ -1,0 +1,80 @@
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.section-total {
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.introduction {
+    width: 96%;
+
+}
+
+.introductionBox {
+    width: 876px;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.introductionTitle {
+    font-size: 24px;
+    margin-top: 9px;
+    font-weight: 600;
+}
+
+.introductionTitleContent {
+    font-size: 16px;
+    color: #555;
+    white-space: pre-line;
+}
+
+input.introductionTitle {
+    font-size: 24px;
+    margin-top: 9px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 0;
+}
+
+textarea.introductionTitleContent {
+    font-size: 16px;
+    color: #555;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 0;
+    resize: none;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+    /* 필요하다면 line-height, min-height 등 추가 */
+}
+
+.modify-button {
+    padding: 6px 18px;
+    background-color: #FF8127;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}

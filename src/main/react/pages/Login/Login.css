@@ -1,0 +1,128 @@
+.login-background {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background: #fff6ed;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    padding: 38px 36px 28px 36px;
+    width: 340px;
+    text-align: center;
+    border: 1.5px solid #ffe0c2;
+}
+
+.login-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 26px;
+}
+
+.login-logo-img {
+    width: 230px;
+    height: 100px;
+
+}
+
+.login-logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #212529;
+    letter-spacing: 1px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.login-input {
+    height: 40px;
+    border: 1.5px solid #ffe0c2;
+    border-radius: 7px;
+    padding-left: 14px;
+    font-size: 14px;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.login-input::placeholder {
+    font-size: 14px;
+}
+
+.login-input:focus {
+    border-color: #ff8127;
+}
+
+.login-btn {
+    height: 40px;
+    background: #ff8127;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 7px;
+    margin-top: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-btn:hover {
+    background: #ff9e53;
+}
+
+.login-links {
+    margin: 20px 0 20px 0;
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.login-link {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.login-link:hover {
+    color: #ff8127;
+
+}
+
+.login-divider {
+    color: #ddd;
+    font-size: 13px;
+}
+
+.login-social-title {
+    font-size: 13px;
+    color: #888;
+    margin: 10px 0 13px 0;
+}
+
+.login-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 4px;
+}
+
+.login-social-icons img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #eee;
+    object-fit: contain;
+    transition: box-shadow 0.2s;
+}

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.lecture.mapperJava.LectureMapper">
+
+    <insert id="writeRecruitmentPost" parameterType="RecruitmentPostVO" useGeneratedKeys="true" keyProperty="recruitmentPostId">
+        INSERT INTO recruitment_post (
+            recruitment_post_title,
+            recruitment_post_content,
+            recruitment_post_category,
+            recruitment_post_weekly_sessions,
+            recruitment_post_session_duration,
+            recruitment_post_price,
+            recruitment_post_price_basis,
+            recruitment_post_contact_start_time,
+            recruitment_post_contact_end_time,
+            recruitment_post_avg_response_time,
+            user_primary_id
+        ) VALUES (
+             #{recruitmentPostTitle},
+             #{recruitmentPostContent},
+             #{recruitmentPostCategory},
+             #{recruitmentPostWeeklySessions},
+             #{recruitmentPostSessionDuration},
+             #{recruitmentPostPrice},
+             #{recruitmentPostPriceBasis},
+             #{recruitmentPostContactStartTime},
+             #{recruitmentPostContactEndTime},
+             #{recruitmentPostAvgResponseTime},
+             #{userPrimaryId}
+         )
+    </insert>
+
+    <insert id="insertRecruitmentPostImage">
+        INSERT INTO image (recruitment_post_id, img_url)
+        VALUES (#{recruitmentPostId}, #{imageUrl})
+    </insert>
+
+    <insert id="insertRecruitmentPostMainImage">
+        INSERT INTO image (recruitment_post_id, img_url, img_main)
+        VALUES (#{recruitmentPostId}, #{imageUrl}, TRUE)
+    </insert>
+
+    <select id="getLectures" resultType="RecruitmentPostVO">
+        SELECT *
+        FROM recruitment_post
+        <where>
+            <if test="category != null and category != '' and category != '전체보기' and category != 'undefined'">
+                AND recruitment_post_category LIKE CONCAT ('%', #{category}, '%')
+            </if>
+            <if test="search != null and search != ''">
+                AND recruitment_post_title LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getOneLecture" resultType="RecruitmentPostVO">
+        SELECT rp.*,
+                img.img_url
+        FROM recruitment_post rp
+            LEFT JOIN image img
+            ON rp.recruitment_post_id = img.recruitment_post_id
+            AND img.img_main = true
+        WHERE rp.recruitment_post_id = #{lectureId}
+    </select>
+
+    <insert id="enrollClass" parameterType="ClassManageVO">
+        INSERT INTO class_manage
+            (class_manage_status, recruitment_post_id, user_primary_id)
+        VALUES
+            (#{classManageStatus}, #{recruitmentPostId}, #{userPrimaryId})
+    </insert>
+
+
+    <select id="getUserById" resultType="com.example.ringo.command.UsersVO">
+        SELECT user_primary_id, user_nick_name, user_profile, user_profile_mimetype
+        FROM users
+        WHERE user_primary_id = #{userPrimaryId}
+    </select>
+
+    <insert id="insertLectureReview" parameterType="RecruitmentReviewVO">
+        INSERT INTO recruitment_review (
+            recruitment_review_title,
+            recruitment_review_content,
+            recruitment_review_score,
+            recruitment_post_id,
+            user_primary_id,
+            recruitment_review_time
+        ) VALUES (
+             #{recruitmentReviewTitle},
+             #{recruitmentReviewContent},
+             #{recruitmentReviewScore},
+             #{recruitmentPostId},
+             #{userPrimaryId},
+             current_timestamp
+         )
+    </insert>
+
+    <select id="getLectureReviews" parameterType="int" resultType="com.example.ringo.command.RecruitmentReviewVO">
+        SELECT
+            rr.recruitment_review_id,
+            rr.recruitment_review_title,
+            rr.recruitment_review_content,
+            rr.recruitment_review_score,
+            rr.recruitment_post_id,
+            rr.user_primary_id,
+            rr.recruitment_review_time,
+            u.user_nick_name,
+            u.user_profile,
+            u.user_profile_mimetype
+        FROM recruitment_review rr
+        JOIN users u ON rr.user_primary_id = u.user_primary_id
+        WHERE rr.recruitment_post_id = #{lectureId}
+        ORDER BY rr.recruitment_review_id DESC
+    </select>
+
+    <!-- LectureMapper.xml -->
+    <select id="getPostsByCategory" parameterType="string" resultType="RecruitmentPostVO">
+        SELECT rp.*, u.user_id
+        FROM recruitment_post rp
+        JOIN users u ON rp.user_primary_id = u.user_primary_id
+        WHERE rp.recruitment_post_category = #{category}
+    </select>
+
+    <select id="getOtherClassByGosu" parameterType="map" resultType="RecruitmentPostVO">
+        SELECT
+            rp.recruitment_post_id,
+            rp.recruitment_post_title,
+            rp.recruitment_post_content,
+            rp.recruitment_post_price,
+            img.img_url,
+            u.user_nick_name
+        FROM recruitment_post rp
+            LEFT JOIN image img
+            ON rp.recruitment_post_id = img.recruitment_post_id
+            AND img.img_main = true
+            INNER JOIN users u
+            ON rp.user_primary_id = u.user_primary_id
+        WHERE rp.user_primary_id = #{userPrimaryId}
+        AND rp.recruitment_post_id != #{excludePostId}
+        ORDER BY rp.recruitment_post_id DESC
+            LIMIT 3
+    </select>
+
+    <select id="getLectureImages" resultType="com.example.ringo.command.RecruitmentPostVO">
+        SELECT img.*
+        FROM recruitment_post rp
+        LEFT JOIN image img
+        ON rp.recruitment_post_id = img.recruitment_post_id
+        WHERE rp.recruitment_post_id = #{lectureId}
+    </select>
+
+
+</mapper>

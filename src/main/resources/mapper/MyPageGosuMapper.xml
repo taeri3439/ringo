@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ringo.mypage.mapperJava.GosuClassMapper">
+
+    <resultMap id="gosuClassMap" type="com.example.ringo.command.MyPageVO">
+        <id property="classManageId" column="class_manage_id"/>
+        <result property="classManageStatus" column="class_manage_status"/>
+        <result property="classManageStartDate" column="class_manage_start_date"/>
+        <result property="classManageFinishDate" column="class_manage_finish_date"/>
+        <result property="recruitmentPostId" column="recruitment_post_id"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+
+        <result property="recruitmentPostTitle" column="recruitment_post_title"/>
+        <result property="recruitmentPostContent" column="recruitment_post_content"/>
+        <result property="recruitmentPostSystime" column="recruitment_post_systime"/>
+        <result property="recruitmentPostCategory" column="recruitment_post_category"/>
+        <result property="recruitmentPostViewcount" column="recruitment_post_viewcount"/>
+
+        <result property="userRole" column="user_role" />
+
+    </resultMap>
+
+    <resultMap id="reviewMap" type="com.example.ringo.command.RecruitmentReviewVO">
+        <id property="recruitmentReviewId" column="recruitment_review_id"/>
+        <result property="recruitmentReviewTitle" column="recruitment_review_title"/>
+        <result property="recruitmentReviewContent" column="recruitment_review_content"/>
+        <result property="recruitmentReviewScore" column="recruitment_review_score"/>
+        <result property="recruitmentPostId" column="recruitment_post_id"/>
+        <result property="userPrimaryId" column="user_primary_id"/>
+        <result property="recruitmentReviewTime" column="recruitment_review_time"/>
+        <result property="userNickName" column="user_nick_name"/>
+        <result property="userProfile" column="user_profile"/>
+        <result property="userProfileMimetype" column="user_profile_mimetype"/>
+        <result property="userProfileBase64" column="user_profile_base64"/>
+    </resultMap>
+
+
+
+    <!--  고수 수업 불러오기  -->
+    <select id="getGosuClass" resultMap="gosuClassMap" parameterType="int">
+        SELECT
+            c.class_manage_id,
+            c.class_manage_status,
+            c.class_manage_start_date,
+            c.class_manage_finish_date,
+            c.recruitment_post_id,
+            c.user_primary_id,
+            r.recruitment_post_title,
+            r.recruitment_post_content,
+            r.recruitment_post_systime,
+            r.recruitment_post_category,
+            r.recruitment_post_viewcount,
+            u.user_role
+        FROM class_manage c
+                 JOIN recruitment_post r ON c.recruitment_post_id = r.recruitment_post_id
+                JOIN users u ON c.user_primary_id = u.user_primary_id
+        WHERE c.user_primary_id = #{userPrimaryId}
+          AND u.user_role = '고수'
+          AND c.class_manage_status = '수업중'
+    </select>
+
+    <!-- mylectures: 내가 작성한 강의(글) 목록 조회 -->
+    <select id="findLecturesByUserId" parameterType="long" resultType="RecruitmentPostVO">
+        SELECT * FROM recruitment_post WHERE user_primary_id = #{userPrimaryId}
+    </select>
+
+    <!-- myclassreviews: 내가 작성한 강의 전체에 달린 리뷰 한 번에 조회 -->
+    <select id="findReviewsForMyLectures" parameterType="long" resultMap="reviewMap">
+        SELECT
+            r.recruitment_review_id AS recruitmentReviewId,
+            r.recruitment_post_id AS recruitmentPostId,
+            r.user_id AS userId,
+            r.recruitment_review_title AS recruitmentReviewTitle,
+            r.recruitment_review_content AS recruitmentReviewContent,
+            r.recruitment_review_time AS recruitmentReviewTime,
+            u.user_nick_name AS userNickName,
+            u.user_profile AS userProfile,
+            u.user_profile_mimetype AS userProfileMimetype
+        FROM recruitment_review r
+                 JOIN recruitment_post p ON r.recruitment_post_id = p.recruitment_post_id
+                 JOIN users u ON r.user_id = u.user_id
+        WHERE p.user_primary_id = #{userPrimaryId}
+    </select>
+
+
+</mapper>

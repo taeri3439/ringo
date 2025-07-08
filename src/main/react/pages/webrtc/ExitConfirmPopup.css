@@ -1,0 +1,70 @@
+/* 📄 ExitConfirmPopup.css */
+.ai-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.ai-popup-exit {
+    background-color: #fff;
+    border: 3px solid #FF8127;
+    border-radius: 16px;
+    padding: 24px 28px;
+    max-width: 90%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: popupFadeIn 0.3s ease-in-out;
+    font-family: 'Pretendard', sans-serif;
+    width: 400px;
+    height: 250px;
+}
+
+.ai-popup-exit h3 {
+    color: #FF8127;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.ai-popup-exit p {
+    font-size: 16px;
+    color: #333;
+    white-space: pre-wrap;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.ai-popup-exit button {
+    flex: 1;
+    background-color: #FF8127;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 50px;
+    margin-bottom: 50px;
+}
+
+.ai-popup-exit button:hover {
+    background-color: #e46e1f;
+}
+
+@keyframes popupFadeIn {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

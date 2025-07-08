@@ -1,0 +1,29 @@
+/* Categories */
+.categories {
+    display: flex;
+    padding: 34px 150px;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+    color: #374151;
+    align-items: flex-end;
+}
+
+.category {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.category img {
+    height: 60px;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+}
+
+.category img[data-category="all"] {
+    height: 40px;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+}

@@ -1,0 +1,98 @@
+.chat {
+    background-color: #EDF0F5;
+    padding: 15px;
+    border-radius: 12px;
+    /*height: 100%;*/
+    position: relative;
+    height: 57vh; /* 전체 화면의 90% 차지 */
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat h2 {
+    margin-bottom: 15px;
+}
+
+.chat-box {
+    overflow-y: auto;
+    max-height: 90%;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;    /* 세로로 쌓기 */
+    gap: 8px;
+    flex: 1;
+}
+
+.chat-message {
+    display: inline-block;       /* 내용 크기만큼 너비 */
+    max-width: 70%;              /* 너무 길면 줄바꿈 */
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    align-self: flex-start;      /* 왼쪽 정렬 */
+    /* width: auto;  기본값이라 적어도 됨 */
+}
+
+.chat-message.orange {
+    background-color: #FF8127;
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-input {
+    display: flex;
+    margin-top: 5px;
+    /*position: absolute;*/
+    bottom: 15px;
+    width: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    width: 100%;
+}
+
+.chat-input button {
+    background-color: #FF8127;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.chat-box::-webkit-scrollbar {
+    width: 4px; /* 세로 스크롤바의 너비 */
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* 스크롤바 색상 */
+    border-radius: 10px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background-color: transparent; /* 트랙 배경 투명 */
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+.system-message {
+    text-align: center;
+    color: #888;
+    font-size: 0.85em;
+    margin: 12px 0;
+    font-style: italic;
+}

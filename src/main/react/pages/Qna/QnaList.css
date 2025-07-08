@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+
+}
+
+li, ol, ul, dd, dl {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    vertical-align: top;
+}
+
+/*body {*/
+/*    background-color: #F5F5F0;*/
+/*}*/
+
+.QnaAllBox {
+    width: 60%;
+    margin: 20px auto;
+}
+
+.contentTopBox {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    
+}
+ 
+.textContentArea {
+    width: 65%;
+    margin-left: 10px;
+    
+}
+
+.textContentArea > div > p {
+    margin-top: 50px;
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #FF8127;
+}
+
+.textContentArea > div > input {
+    margin-top: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #000;
+    width: 500px;
+    border: none;
+    border-radius: 20px;
+    border: 1px solid #FF8127;
+}
+
+.textContentArea > div > input:focus {
+    outline: none;
+    border: none;
+    border: 1px solid #b6662c;
+    box-shadow: none;    
+}
+
+.qwer {
+    position: relative;
+}
+
+.search-iconTwo {
+    position: absolute;
+    left: 459px !important;
+    top: 32px !important;;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    opacity: 0.8;
+    cursor: pointer;
+    /*margin-left: 20px;*/
+}
+
+.imgContentArea {
+    width: 30%;
+}
+
+.imgContentArea img {
+    width: 220px;
+    height: 220px;
+   
+}
+
+.contentMiddleBox {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 70px;
+}
+
+
+.contentMiddleTitle {
+    font-size: 35px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.contentMiddleMore {
+    cursor: pointer;
+}
+
+.contentMiddleSubtitle {
+    font-size: 15px;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.contentMiddleHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 수직 정렬 */
+    margin: 0px 10px;
+}
+
+.contentMiddleBody {
+    display: flex;
+    
+    margin-top: 30px;
+    
+}
+
+.contentMiddleBody > div {
+    /* display: inline-block; */
+    font-size: 20px;
+    text-align: center;
+    width:50%;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.FAQContentStudentTabActive {
+    border: 1px solid #777;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: none;
+}
+
+.FAQContentStudentTab {
+    border: none;
+    border-bottom: 1px solid #777;
+}
+
+.FAQContentTeacherTabActive {
+    border: 1px solid #777;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+}
+
+.FAQContentTeacherTab {
+    border: none;
+    border-bottom: 1px solid #777;
+}
+
+.FAQContentBox {
+    border: 1px solid #777;
+    border-top: 1px solid #F5F5F0;
+    padding: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.FAQContentBoxStudentActive {
+    display: block;
+}
+
+.FAQContentBoxStudent {
+    display: none;
+}
+
+.FAQContentBoxStudentActive > div > div {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between
+}
+
+.FAQContentBoxTeacher {
+    display: none;
+}
+
+.FAQContentBoxTeacherActive {
+    display: block;
+}
+
+.FAQContentBoxTeacherActive > div > div {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between
+}
+
+.bottomArrow {
+    margin-top: 6px ;
+    width: 24px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.FAQContentBoxStudentActive > div > div > span:nth-of-type(1) {
+    width: 90%;
+    cursor: pointer;
+}
+
+.FAQContentBoxTeacherActive > div > div > span:nth-of-type(1) {
+    width: 90%;
+    cursor: pointer;
+}
+
+.questionQMark {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 24px;
+}
+
+.FAQContentPost {
+    border-bottom: 2px solid #777;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #F5F5F0;
+    white-space: pre-line;
+    padding: 20px 30px;
+    margin: 10px;
+    min-height: 300px;
+}
+
+.on {
+    display: block !important;
+}
+
+.off {
+    display: none !important;
+}
+
+.contentBottomBox {
+    width: 80%;
+    margin: 70px auto;
+    margin-bottom: 100px;
+
+}
+
+.contentBottomHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 수직 정렬 */
+    margin: 0 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #4e4e4e;
+}
+
+.contentBottomBody {
+    margin-top: 10px;
+
+}
+
+.contentBottomBody > div:nth-of-type(1) {
+    margin-top: 10px;
+}
+
+.contentBottomBody > div {
+    display: flex;
+    flex-direction: column; /* 수직 방향으로 정렬 */
+    gap: 8px; /* 줄 간격(optional) */
+}
+
+.QnaAnswerNumber {
+    width: 4%;
+    text-align: center;
+}
+
+.QnaAnswerTitle2 {
+    width: 55%;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+.QnaAnswerTitle {
+    width: 55%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.QnaAnswerOther {
+    width: 40%;
+    display: flex;
+    justify-content: space-between
+    
+}
+
+.QnaOneLine > div:nth-of-type(3) > div {
+    text-align: center;
+}
+
+.QnaOneLine {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px ;
+    border-bottom: 1px solid rgb(192, 192, 192);
+    cursor: pointer;
+}
+
+.qnaContentPost {
+    border-bottom: 1px solid #b6b6b6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #F5F5F0;
+    white-space: pre-line;
+    padding: 20px 30px;
+    margin: 10px;
+    min-height: 300px;
+}
+
+.qnaContentPostTwo {
+    border-bottom: 2px solid #777;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #F5F5F0;
+    white-space: pre-line;
+    padding: 20px 30px;
+    margin: 10px;
+    min-height: 300px;
+}
+
+.qnaWriteButton {
+    display: block;
+    margin-top: 20px;
+    border: none;
+    width: 125px;
+    height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 37px;
+    color: #fff;
+    font-weight: 400;
+    background-color: #ff8127;
+    margin-left: 792px;
+    cursor: pointer;
+
+}
+
+.pagenation {
+    margin-top: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    text-decoration: none;
+}
+
+.pagenation > p {
+    display: inline-block;
+    margin: 8px;
+    font-size: 23px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 20px;
+    height: 23px;
+}
+
+.pagenation > p > a {
+    text-decoration: none;
+
+}
+
+.pg {
+    display: inline-block; width: 20px; height: 20px;
+
+}
+
+.pageNumber.active {
+    font-weight: 600;
+    color: #FF8127;
+    font-size: 24px;
+}
+
+.pageNumber {
+    font-size: 22px;
+}
